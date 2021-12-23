@@ -36,17 +36,8 @@ app.get("/preview/:type/:id", (req, res, next) => {
   const fileLoc = path.resolve(__dirname, "../", "src", location, component);
   try {
     const Component = require(fileLoc).default;
-    
-    fs.readFile(path.resolve("./build/index.html"), "utf-8", (err, data) => {
-      if (err) {
-        console.log(err);
-        return res.status(500).send("Some error happened");
-      }
-      return res.send(
-        ReactDOMServer.renderToString(Component({...req.query})
-        )
-      );
-    })
+    res.send(ReactDOMServer.renderToString(Component({...req.query})));
+
   } catch (e) {
     res.status(404).send("Make sure you are doing something good -_____-");
   }

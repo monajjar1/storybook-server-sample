@@ -1,6 +1,6 @@
-function Button({primary = false, label="Button"}) {
+function Button({primary = false, label="Button", theme}) {
   let className = "storybook-button";
-  if (primary) {
+  if (primary == 'true') {
     className += " storybook-button--primary";
   }else {
     className += " storybook-button--secondary";

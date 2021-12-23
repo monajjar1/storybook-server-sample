@@ -1,7 +1,7 @@
 {
   "title": "Example/Page",
   "parameters": {
-    "server": { "id": "page" }
+    "server": { "id": "pages/page" }
   },
   "stories": [
     {
