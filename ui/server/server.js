@@ -7,6 +7,7 @@ import path from "path";
 import React from 'react';
 import ReactDOMServer from "react-dom/server";
 
+import App from "../src/App";
 
 const PORT = 8080;
 
@@ -22,8 +23,8 @@ app.use(cors());
 //     }
 //     return res.send(
 //       data.replace(
-//         '<div id="root"></div>',
-//         `<div id="root">${ReactDOMServer.renderToString(<App />)}</div>`
+//         '<div id="a7a"></div>',
+//         `<div id="a7a">${ReactDOMServer.renderToString(<App />)}</div>`
 //       )
 //     );
 //   });
@@ -36,13 +37,14 @@ app.get("/preview/:type/:id", (req, res, next) => {
   const fileLoc = path.resolve(__dirname, "../", "src", location, component);
   try {
     const Component = require(fileLoc).default;
-    res.send(ReactDOMServer.renderToString(Component({...req.query})));
-
+    const html = fs.readFileSync(path.resolve("./build/index.html"),'utf-8');
+    // res.send(html.replace('<div id="a7a"></div>', `<script>window.intialState='${ReactDOMServer.renderToString(<Component {...req.query}/>)}'</script><div id="a7a">${<App/>}</div>`));
+    res.send(html.replace('<div id="a7a"></div>', `<script>window.intialState={Component:${Component}}</script><div id="a7a">${<App/>}</div>`));
   } catch (e) {
+    console.log(e);
     res.status(404).send("Make sure you are doing something good -_____-");
   }
 });
-
 
 app.use(express.static(path.resolve(__dirname, "..", "build")));
 

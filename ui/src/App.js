@@ -1,23 +1,17 @@
-import logo from './logo.svg';
-import './App.css';
+import { useEffect, useState } from 'react';
+import {jsx as _jsx} from 'react/jsx-runtime';
 
+import './App.css';
 function App() {
+  const [SsrData, setSsrData] = useState({});
+  useEffect(()=>{
+    if (window.intialState) {
+      setSsrData(window.intialState);
+    }
+  },[])
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+       {SsrData && SsrData.Component && <SsrData.Component {...SsrData.props} />}
     </div>
   );
 }
