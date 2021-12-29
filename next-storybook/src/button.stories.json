@@ -1,0 +1,33 @@
+ {
+  "title": "PNAS/Button",
+  "parameters": {
+    "server": { "id": "components/button"}
+  },
+  "args": { "label": "Button" },
+  "argTypes": {
+    "label": { "control": "text" },
+    "primary": { "control": "boolean" },
+    "backgroundColor": { "control": "color" },
+    "size": {
+      "control": { "type": "select", "options": ["small", "medium", "large"] }
+    },
+    "onClick":  { "action": "clicked" }
+  },
+  "stories": [
+    {
+      "name": "Primary",
+      "args": { "primary": true }
+    },
+    {
+      "name": "Secondary"
+    },
+    {
+      "name": "Large",
+      "args": { "size": "large" }
+    },
+    {
+      "name": "Small",
+      "args": { "size": "small" }
+    }
+  ]
+}

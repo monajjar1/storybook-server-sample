@@ -1,0 +1,15 @@
+{
+  "title": "AAAS/Page",
+  "parameters": {
+    "server": { "id": "pages/page" }
+  },
+  "stories": [
+    {
+      "name": "LoggedIn",
+      "args": { "user": {} }
+    },
+    {
+      "name": "LoggedOut"
+    }
+  ]
+}
