@@ -4,8 +4,8 @@
   import Button from '../../src/components/button';
   
   ReactDOM.hydrate(
-      <Button {...window.__INITIAL__DATA__} />,
-    document.getElementById('root')
+      <Button {...window.__INITIAL__DATA__} ></Button>,
+    document.getElementById('next-app')
   );
   
   

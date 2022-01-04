@@ -4,8 +4,8 @@
   import App from '../../src/components/app';
   
   ReactDOM.hydrate(
-      <App {...window.__INITIAL__DATA__} />,
-    document.getElementById('root')
+      <App {...window.__INITIAL__DATA__} ></App>,
+    document.getElementById('next-app')
   );
   
   

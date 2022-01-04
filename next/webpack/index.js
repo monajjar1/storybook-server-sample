@@ -22,7 +22,6 @@ let plugins = [
 
 if (process.env.NODE_ENV !== "production") {
   plugins.push(new ReactAppGeneratorPlugin());
-  plugins.push(new webpack.HotModuleReplacementPlugin());
 }
 
 const ASSET_PATH = process.env.ASSET_PATH || "/";
@@ -31,11 +30,6 @@ const configs = {
   entry: () =>
     new Promise((resolve) => {
       const files = {};
-
-      if (process.env.NODE_ENV !== "production") {
-        files["react-hot-loader"] = "react-hot-loader/patch";
-        files["hot-middleware"] = "webpack-hot-middleware/client?reload&overlay=false";
-      }
       fs.readdirSync(path.resolve(__dirname, "gen")).forEach((item) => {
         files[item.replace(/\.?js$/, "")] = `./webpack/gen/${item}`;
       });

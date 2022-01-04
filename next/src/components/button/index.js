@@ -1,9 +1,6 @@
 import './index.scss'
+import Link from './link'
 const Button = ({label})=>{
-
-    const onClick = ()=>{
-        alert('its working now 1DSADSAD3!')
-    }
-    return (<button onClick={onClick}>{label}</button>)
+    return (<Link label={label} />  )
 }
 export default Button;

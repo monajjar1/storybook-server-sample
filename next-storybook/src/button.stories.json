@@ -1,5 +1,5 @@
  {
-  "title": "PNAS/Button",
+  "title": "Button",
   "parameters": {
     "server": { "id": "components/button"}
   },
@@ -10,8 +10,7 @@
     "backgroundColor": { "control": "color" },
     "size": {
       "control": { "type": "select", "options": ["small", "medium", "large"] }
-    },
-    "onClick":  { "action": "clicked" }
+    }
   },
   "stories": [
     {

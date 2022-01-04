@@ -5,7 +5,11 @@ module.exports = {
   ],
   "addons": [
     "@storybook/addon-links",
-    "@storybook/addon-essentials"
+    "@storybook/addon-controls",
+    "@storybook/addon-docs",
+    "@storybook/addon-toolbars",
+    "@storybook/addon-viewport",
+    "../src/addons/theme-selector/preset.js"
   ],
   "framework": "@storybook/server"
 }

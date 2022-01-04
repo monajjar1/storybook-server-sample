@@ -19,7 +19,6 @@ const isDevMode = process.env.NODE_ENV === "development";
 if (isDevMode) {
   const webpack = require('webpack');
   const webpackDevMiddleware = require('webpack-dev-middleware');
-  const webpackHotMiddleware = require("webpack-hot-middleware");
   const config = require('../webpack').default;
   config.mode = 'development';
   const compiler = webpack(config);
@@ -28,9 +27,9 @@ if (isDevMode) {
   app.use(
     webpackDevMiddleware(compiler, {
       publicPath: config.output.publicPath,
+      writeToDisk: true,
     })
   );
-  app.use(webpackHotMiddleware(compiler));
 }
 
 // app.use("^/$", (req, res, next) => {
@@ -55,42 +54,34 @@ app.get("/preview/:type/:id", (req, res, next) => {
   const fileLoc = path.resolve(__dirname, "../", "src", location, name);
   const scripts = ["/js/vendors.build.js", `/js/${name}.build.js`];
   const styles = [`/css/${name}.build.css`];
-
-
-  if(isDevMode){
-    scripts.push("/js/react-hot-loader.build.js")
-    scripts.push("/js/hot-middleware.build.js")
-  }
   try {
     const Component = require(fileLoc).default;
     const html = `
-    <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    ${scripts.map((src) => `<script defer src="${src}"></script>`).join("")}
-    ${styles.map((src) => `<link href="${src}" rel="stylesheet" />`).join("")}
-    </head>
-
     <script>window.__INITIAL__DATA__=${JSON.stringify(req.query)}</script>
-</head>
-<body>
-    <div id="root">${ReactDOMServer.renderToString(
-      <Component {...req.query} />
-    )}</div>
-</body>
-</html>
+    ${scripts.map((src) => `<script defer src="http://localhost:8080${src}"></script>`).join("")}
+    ${styles.map((src) => `<link href="http://localhost:8080${src}" rel="stylesheet" />`).join("")}
+    <div id="next-app">${ReactDOMServer.renderToString(<Component {...req.query} />)}</div>
     `;
     res.send(html);
-    // res.send(html.replace('<div id="a7a"></div>', `<script>window.intialState={Component:${Component}}</script><div id="a7a">${<App/>}</div>`));
   } catch (e) {
     console.log(e);
     res.status(404).send("Make sure you are doing something good -_____-");
   }
 });
+
+
+app.get("/api/themes", (req, res, next) => {
+  res.writeHead(200, {"Content-Type": "application/json"});
+  var json = JSON.stringify([
+    {title:"Core",value:"core"},
+    {title:"Photo",value:"photo"},
+    {title:"Classic",value:"classic"},
+    {title:"Eureka",value:"eureka"},
+    {title:"NextGen",value:"nextgen"},
+  ]);
+  res.end(json);
+});
+
 
 app.use(express.static(path.resolve(__dirname, "..", "build")));
 
