@@ -23,7 +23,7 @@ if (isDevMode) {
   config.mode = 'development';
   const compiler = webpack(config);
 
-  
+
   app.use(
     webpackDevMiddleware(compiler, {
       publicPath: config.output.publicPath,
@@ -71,14 +71,57 @@ app.get("/preview/:type/:id", (req, res, next) => {
 
 
 app.get("/api/themes", (req, res, next) => {
-  res.writeHead(200, {"Content-Type": "application/json"});
+  res.writeHead(200, { "Content-Type": "application/json" });
   var json = JSON.stringify([
-    {title:"Core",value:"core"},
-    {title:"Photo",value:"photo"},
-    {title:"Classic",value:"classic"},
-    {title:"Eureka",value:"eureka"},
-    {title:"NextGen",value:"nextgen"},
+    "Photo",
+    "Classic",
+    "Eureka",
+    "NextGen"
   ]);
+  res.end(json);
+});
+
+
+app.get("/api/products", (req, res, next) => {
+  res.writeHead(200, { "Content-Type": "application/json" });
+
+  const theme = req.query?.theme?.toLowerCase();
+  let list =[];
+  switch (theme) {
+    case 'eureka':
+      list = [
+        "AAAS",
+        "PNAS",
+      ]
+      break;
+    case 'photo':
+      list = [
+        "ASHA",
+        "ACP",
+        "APHARMA",
+      ]
+      break;
+    case 'classic':
+      list = [
+        "UCHICAGO",
+        "ACC",
+        "KFSH",
+        "AIAA",
+      ]
+      case 'nextgen':
+        list = [
+          "CATALYST",
+          "NEJM"
+        ]
+      break;
+      default:
+        list = [
+          "Physio",
+          "Perclies",
+          "FSG",
+        ]
+  }
+  var json = JSON.stringify(list);
   res.end(json);
 });
 
