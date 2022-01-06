@@ -49,17 +49,23 @@ if (isDevMode) {
 
 app.get("/preview/:type/:id", (req, res, next) => {
   const location = req.params.type;
-  const name = req.params.id;
+  let name = req.params.id;
+  const theme = req.query.theme;
 
   const fileLoc = path.resolve(__dirname, "../", "src", location, name);
-  const scripts = ["/js/vendors.build.js", `/js/${name}.build.js`];
-  const styles = [`/css/${name}.build.css`];
+  if(theme) {
+    name = `themes/${theme}/${name}`
+  }
+
+  const scripts = ["js/vendors.build.js", `js/${name}.build.js`];
+  const styles = [`css/${name}.build.css`];
+
   try {
     const Component = require(fileLoc).default;
     const html = `
     <script>window.__INITIAL__DATA__=${JSON.stringify(req.query)}</script>
-    ${scripts.map((src) => `<script defer src="http://localhost:8080${src}"></script>`).join("")}
-    ${styles.map((src) => `<link href="http://localhost:8080${src}" rel="stylesheet" />`).join("")}
+    ${scripts.map((src) => `<script defer src="http://localhost:8080/${src}"></script>`).join("")}
+    ${styles.map((src) => `<link href="http://localhost:8080/${src}" rel="stylesheet" />`).join("")}
     <div id="next-app">${ReactDOMServer.renderToString(<Component {...req.query} />)}</div>
     `;
     res.send(html);
@@ -124,7 +130,6 @@ app.get("/api/products", (req, res, next) => {
   var json = JSON.stringify(list);
   res.end(json);
 });
-
 
 app.use(express.static(path.resolve(__dirname, "..", "build")));
 

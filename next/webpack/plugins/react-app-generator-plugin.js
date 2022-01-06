@@ -8,10 +8,10 @@ export default class ReactAppGeneratorPlugin {
   }
   apply(compiler) {
     compiler.hooks.compile.tap(this.toString(), (stats) => {
-      const modules = this.modules;
-      if (this.shouldUpdate(modules)) {
-        this.generate(modules);
-      }
+      // const modules = this.modules;
+      // if (this.shouldUpdate(modules)) {
+      //   this.generate(modules);
+      // }
     });
   }
 
@@ -45,8 +45,24 @@ export default class ReactAppGeneratorPlugin {
   }
 
 
+  walk(dir)  {
+    var results = [];
+    fs.readdirSync(dir).forEach(file=>{
+      file = dir + '/' + file;
+      var fileStat = fs.statSync(file);
+      if(fileStat && fileStat.isDirectory()) {
+        results = results.concat(this.walk(file));
+      }else if(file && (file.endsWith('.js') || file.endsWith('.ts')) ) {
+        results.push(file);
+      }
+    });
+    return results;
+  };
+
+
   get modules() {
-    return fs.readdirSync(path.resolve(__dirname, "..", '..', "src", "components"))
+    const results = this.walk(path.resolve(__dirname, "..", '..', "src"));
+    return results
   }
 
   generate(modules) {
@@ -60,10 +76,29 @@ export default class ReactAppGeneratorPlugin {
 
     modules.forEach(
       (item) => {
-        const template = templateGenerator(item);
+        const relativePath = path.relative( path.resolve(__dirname, "..",'..','src'), item );
+
+        const splitted = relativePath.split('/');
+
+
+        const isRoot = splitted.indexOf('components') === 0;
+
+        let loc = ''
+        if (!isRoot) {
+          loc = `${splitted[0]}/${splitted[1]}`;
+          const dirName = path.resolve(generatedDir,loc);
+          if (!fs.existsSync(dirName)) {
+            fs.mkdirSync(dirName, { recursive: true });
+          }
+        }
+
+        splitted.pop();
+        const filename = splitted.pop();
+        const template = templateGenerator(relativePath, filename, isRoot);
+
 
         fs.writeFileSync(
-          path.resolve(generatedDir, `${item}.js`),
+          path.resolve(generatedDir, loc, `${filename}.js`),
           template,
           function (err) {
             if (err) throw err;

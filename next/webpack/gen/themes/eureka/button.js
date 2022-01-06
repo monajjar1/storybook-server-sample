@@ -1,10 +1,10 @@
 
   import React from 'react';
   import ReactDOM from 'react-dom';
-  import App from '../../src/components/app/index.js';
+  import Button from '../../../../src/themes/eureka/components/button/index.js';
   
   ReactDOM.hydrate(
-      <App {...window.__INITIAL__DATA__} ></App>,
+      <Button {...window.__INITIAL__DATA__} ></Button>,
     document.getElementById('next-app')
   );
   

@@ -26,12 +26,31 @@ if (process.env.NODE_ENV !== "production") {
 
 const ASSET_PATH = process.env.ASSET_PATH || "/";
 
+const walk = (dir) => {
+    var results = [];
+    fs.readdirSync(dir).forEach(file=>{
+      file = dir + '/' + file;
+      var fileStat = fs.statSync(file);
+      if(fileStat && fileStat.isDirectory()) {
+        results = results.concat(walk(file));
+      }else if(file && (file.endsWith('.js') || file.endsWith('.ts')) ) {
+        results.push(file);
+      }
+    });
+    return results;
+  };
+
+
 const configs = {
   entry: () =>
     new Promise((resolve) => {
       const files = {};
-      fs.readdirSync(path.resolve(__dirname, "gen")).forEach((item) => {
-        files[item.replace(/\.?js$/, "")] = `./webpack/gen/${item}`;
+      const dir = walk(path.resolve(__dirname, "gen"));
+      dir.forEach((item) => {
+        const relativePath = path.relative( path.resolve(__dirname, "..",), item );
+        const splitted = relativePath.split('/');
+        const fileName = splitted.slice(2,splitted.length).join('/');
+        files[fileName.replace(/\.?js$/, "")] = `./${relativePath}`;
       });
       resolve(files);
     }),

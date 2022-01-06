@@ -1,7 +1,7 @@
 
   import React from 'react';
   import ReactDOM from 'react-dom';
-  import App from '../../src/components/app/index.js';
+  import App from '../../../../src/themes/eureka/components/app/index.js';
   
   ReactDOM.hydrate(
       <App {...window.__INITIAL__DATA__} ></App>,
