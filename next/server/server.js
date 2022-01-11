@@ -54,7 +54,7 @@ app.get("/preview/:type/:id", (req, res, next) => {
 
   const fileLoc = path.resolve(__dirname, "../", "src", location, name);
   if(theme) {
-    name = `themes/${theme}/${name}`
+    name = `themes/${theme.toLowerCase()}/${name}`
   }
 
   const scripts = ["js/vendors.build.js", `js/${name}.build.js`];

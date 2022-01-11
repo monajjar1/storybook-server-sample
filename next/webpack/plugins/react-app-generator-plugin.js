@@ -8,10 +8,10 @@ export default class ReactAppGeneratorPlugin {
   }
   apply(compiler) {
     compiler.hooks.compile.tap(this.toString(), (stats) => {
-      // const modules = this.modules;
-      // if (this.shouldUpdate(modules)) {
-      //   this.generate(modules);
-      // }
+      const modules = this.modules;
+      if (this.shouldUpdate(modules)) {
+        this.generate(modules);
+      }
     });
   }
 
@@ -31,13 +31,14 @@ export default class ReactAppGeneratorPlugin {
     }
 
     const currentModules = modules;
-    const generateModules = fs.readdirSync(generatedDir);
+    const generateModules = this.walk(generatedDir);
 
 
     if (currentModules.length != generateModules.length) {
       return true;
     }
 
+    return false;
     const filterd = currentModules.filter(module => {
       return generateModules.findIndex(generatedModule => generatedModule.toLowerCase().indexOf(module.toLowerCase()) > -1) < 0;
     })
