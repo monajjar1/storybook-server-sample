@@ -31,10 +31,10 @@
         font-size: 1.25rem;
     }
     &--primary {
-        @include theme(#0d6efd, #0d6efd, #fff);
+        @include theme(#004C36, #004C36, #fff);
     }
     &--secondary {
-        @include theme(#6c757d, #6c757d, #fff);
+        @include theme(#C1E6F7, #C1E6F7, #004C36);
     }
     &--info {
         @include theme(#0dcaf0, #0dcaf0, #000);

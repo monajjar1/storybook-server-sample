@@ -1,7 +1,9 @@
-const Link = ({label})=>{
+const Link = ({label, type, size})=>{
     const onClick = ()=>{
         alert('its working now!!!!!!')
     }
-    return (<input type="button" onClick={onClick} value={label} />  )
+    console.log(type);
+    let classes = `btn btn--${type} btn--${size}`
+    return (<input type="button" className={classes} onClick={onClick} value={label} />  )
 }
 export default Link;

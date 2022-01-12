@@ -3,30 +3,20 @@
   "parameters": {
     "server": { "id": "components/button"}
   },
-  "args": { "label": "Button" },
+  "args": { "label": "Button",
+    "type": "primary",
+    "size": "small"
+  },
   "argTypes": {
     "label": { "control": "text" },
-    "primary": { "control": "boolean" },
-    "backgroundColor": { "control": "color" },
+    "type": { "type": "select", "options": ["primary", "secondary", "warning", "danger", "info", "light", "dark"] },
     "size": {
       "control": { "type": "select", "options": ["small", "medium", "large"] }
     }
   },
   "stories": [
     {
-      "name": "Primary",
-      "args": { "primary": true }
-    },
-    {
-      "name": "Secondary"
-    },
-    {
-      "name": "Large",
-      "args": { "size": "large" }
-    },
-    {
-      "name": "Small",
-      "args": { "size": "small" }
+      "name": "default"
     }
   ]
 }

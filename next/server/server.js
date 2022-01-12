@@ -50,13 +50,19 @@ if (isDevMode) {
 app.get("/preview/:type/:id", (req, res, next) => {
   const location = req.params.type;
   let name = req.params.id;
-  const theme = req.query.theme;
+  const theme = req.query.theme?.toLowerCase();
+  const product = req.query.product;
 
   const fileLoc = path.resolve(__dirname, "../", "src", location, name);
-  if(theme) {
-    name = `themes/${theme.toLowerCase()}/${name}`
-  }
 
+  if(product) {
+    name = `product/${product.toLowerCase()}/${name}`
+  }else if(theme && theme !== "core") {
+      name = `themes/${theme.toLowerCase()}/${name}`
+  }else {
+
+  }
+  console.log(name)
   const scripts = ["js/vendors.build.js", `js/${name}.build.js`];
   const styles = [`css/${name}.build.css`];
 
@@ -79,10 +85,9 @@ app.get("/preview/:type/:id", (req, res, next) => {
 app.get("/api/themes", (req, res, next) => {
   res.writeHead(200, { "Content-Type": "application/json" });
   var json = JSON.stringify([
+      "Core",
     "Photo",
-    "Classic",
-    "Eureka",
-    "NextGen"
+    "Eureka"
   ]);
   res.end(json);
 });
@@ -96,29 +101,13 @@ app.get("/api/products", (req, res, next) => {
   switch (theme) {
     case 'eureka':
       list = [
-        "AAAS",
-        "PNAS",
+        "AAAS"
       ]
       break;
     case 'photo':
       list = [
-        "ASHA",
-        "ACP",
-        "APHARMA",
+          "SUP",
       ]
-      break;
-    case 'classic':
-      list = [
-        "UCHICAGO",
-        "ACC",
-        "KFSH",
-        "AIAA",
-      ]
-      case 'nextgen':
-        list = [
-          "CATALYST",
-          "NEJM"
-        ]
       break;
       default:
         list = [

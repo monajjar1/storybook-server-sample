@@ -1,0 +1,137 @@
+ {
+  "title": "Multi Search",
+  "parameters": {
+    "server": { "id": "components/multi-search"}
+  },
+   "args": { "items": [
+     {
+       "id": 1,
+       "meta": {
+         "type": "Article",
+         "coverDate": "June 06",
+         "serial": "Journal X"
+       },
+       "title": "The Incidental Splenic Mass at CT: Does It Need Further Work-up? An Observational Study",
+       "authors": [
+         {
+           "name": "Mohammad alnajjar,",
+           "key": 1
+         },
+         {
+           "name": "Fahed Alwaisi,",
+           "key": 2
+         },
+         {
+           "name": "Ibrahim Rahhal,",
+           "key": 3
+         },
+         {
+           "name": "Abdallah Alqoraan,",
+           "key": 4
+         },
+         {
+           "name": "Mohammad Khalifeh",
+           "key": 5
+         }
+       ]
+     },
+     {
+       "id": 2,
+       "meta": {
+         "type": "Article",
+         "coverDate": "June 06",
+         "serial": "Journal X"
+       },
+       "title": "The Incidental Splenic Mass at CT: Does It Need Further Work-up? An Observational Study",
+       "authors": [
+         {
+           "name": "Mohammad alnajjar,",
+           "key": 1
+         },
+         {
+           "name": "Fahed Alwaisi,",
+           "key": 2
+         },
+         {
+           "name": "Ibrahim Rahhal,",
+           "key": 3
+         },
+         {
+           "name": "Abdallah Alqoraan,",
+           "key": 4
+         },
+         {
+           "name": "Mohammad Khalifeh",
+           "key": 5
+         }
+       ]
+     },
+     {
+       "id":3,
+       "meta": {
+         "type": "Article",
+         "coverDate": "June 06",
+         "serial": "Journal X"
+       },
+       "title": "The Incidental Splenic Mass at CT: Does It Need Further Work-up? An Observational Study",
+       "authors": [
+         {
+           "name": "Mohammad alnajjar,",
+           "key": 1
+         },
+         {
+           "name": "Fahed Alwaisi,",
+           "key": 2
+         },
+         {
+           "name": "Ibrahim Rahhal,",
+           "key": 3
+         },
+         {
+           "name": "Abdallah Alqoraan,",
+           "key": 4
+         },
+         {
+           "name": "Mohammad Khalifeh",
+           "key": 5
+         }
+       ]
+     },
+     {
+       "id":4,
+       "meta": {
+         "type": "Article",
+         "coverDate": "June 06",
+         "serial": "Journal X"
+       },
+       "title": "The Incidental Splenic Mass at CT: Does It Need Further Work-up? An Observational Study",
+       "authors": [
+         {
+           "name": "Mohammad alnajjar,",
+           "key": 1
+         },
+         {
+           "name": "Fahed Alwaisi,",
+           "key": 2
+         },
+         {
+           "name": "Ibrahim Rahhal,",
+           "key": 3
+         },
+         {
+           "name": "Abdallah Alqoraan,",
+           "key": 4
+         },
+         {
+           "name": "Mohammad Khalifeh",
+           "key": 5
+         }
+       ]
+     }
+   ] },
+  "stories": [
+    {
+      "name": "Initial"
+    }
+  ]
+}
