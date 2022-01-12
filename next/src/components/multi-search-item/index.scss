@@ -1,0 +1,31 @@
+.multi-search {
+  &__item {
+    border: 1px solid black;
+    padding: 0.5rem;
+    list-style: none;
+    width: 48%;
+    margin-bottom: 1.5rem;
+  }
+  &__meta {
+    font-size: 0.85rem;
+    color: black;
+    span {
+      margin-right: 0.5rem;
+    }
+  }
+  &__title {
+    margin: 0.5rem 0;
+  }
+  &__authors {
+    padding: 0;
+    margin-left: 0;
+    display: flex;
+    li {
+      list-style: none;
+      font-size: 1rem;
+      &:not(:last-child) {
+        padding-right: 0.2rem;
+      }
+    }
+  }
+}

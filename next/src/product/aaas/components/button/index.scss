@@ -1,0 +1,54 @@
+@mixin theme($bg, $borderColor, $color) {
+    background: $bg;
+    border-color: $borderColor;
+    color: $color;
+}
+
+.btn {
+    display: inline-block;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #212529;
+    text-align: center;
+    text-decoration: none;
+    vertical-align: middle;
+    cursor: pointer;
+    user-select: none;
+    background-color: transparent;
+    border: 1px solid transparent;
+    border-radius: 0.25rem;
+    transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+    &--small {
+        padding: 0.375rem 0.75rem;
+        font-size: 1rem;
+    }
+    &--medium {
+        padding: 0.375rem 1.25rem;
+        font-size: 1.125rem;
+    }
+    &--large {
+        padding: 0.375rem 2rem;
+        font-size: 1.25rem;
+    }
+    &--primary {
+        @include theme(#CA2015, #CA2015, #fff);
+    }
+    &--secondary {
+        @include theme(#C1E6F7, #C1E6F7, #004C36);
+    }
+    &--info {
+        @include theme(#0dcaf0, #0dcaf0, #000);
+    }
+    &--warning {
+        @include theme(#ffc107, #ffc107, #000);
+    }
+    &--danger {
+        @include theme(#dc3545, #dc3545, #fff);
+    }
+    &--light {
+        @include theme(#f8f9fa, #f8f9fa, #000);
+    }
+    &--dark {
+        @include theme(#212529, #212529, #fff);
+    }
+}
