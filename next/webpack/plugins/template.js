@@ -10,13 +10,8 @@ const templateGenerator = (filePath,name,isRoot) => {
   import React from 'react';
   import ReactDOM from 'react-dom';
   import ${className} from '${isRoot ? '': '../../'}../../src/${filePath}';
-  
-  ReactDOM.hydrate(
-      <${className} {...window.__INITIAL__DATA__} ></${className}>,
-    document.getElementById('next-app')
-  );
-  
-  
+  const container = document.getElementById('next-app');
+  const root = ReactDOM.hydrateRoot(container, <${className} {...window.__INITIAL__DATA__} />);
   if (module.hot) {
     module.hot.accept();
   }

@@ -62,21 +62,26 @@ app.get("/preview/:type/:id", (req, res, next) => {
   }else {
 
   }
-  console.log(name)
   const scripts = ["js/vendors.build.js", `js/${name}.build.js`];
   const styles = [`css/${name}.build.css`];
 
   try {
     const Component = require(fileLoc).default;
     const html = `
-    <script>window.__INITIAL__DATA__=${JSON.stringify(req.query)}</script>
-    ${scripts.map((src) => `<script defer src="http://localhost:8080/${src}"></script>`).join("")}
-    ${styles.map((src) => `<link href="http://localhost:8080/${src}" rel="stylesheet" />`).join("")}
-    <div id="next-app">${ReactDOMServer.renderToString(<Component {...req.query} />)}</div>
+    <html>
+      <head>
+        <script>window.__INITIAL__DATA__=${JSON.stringify(req.query)}</script>
+        ${styles.map((src) => `<link href="http://localhost:8080/${src}" rel="stylesheet" />`).join("")}
+        ${scripts.map((src) => `<script defer src="http://localhost:8080/${src}"></script>`).join("")}
+        </script>
+        <body>
+          <div id="next-app">${ReactDOMServer.renderToString(<Component {...req.query} />)}</div>
+      </body>
+    </html>
     `;
     res.send(html);
   } catch (e) {
-    console.log(e);
+    // console.log(e);
     res.status(404).send("Make sure you are doing something good -_____-");
   }
 });
